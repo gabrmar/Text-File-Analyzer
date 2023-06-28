@@ -1,4 +1,4 @@
-import re
+import re # Regular expresions module
 
 
 #------------------------------Bloque Principal--------------------------------------------------------
@@ -10,20 +10,18 @@ def filter_text(file_object): #Función de filtrado del show tech
     archivo de show tech"""
 
     patterns = ["--* show version --*","--* show running-config --*","--* show platform --*",
-                "--* show romvar --*","-* show inventory --*","--* show region --*"]
+                "--* show romvar --*","-* show inventory --*","--* show region --*"] #Initial borders
     text = file_object.read()
-    matches = []
+    matches = [] #Lists of match objects. Match objects are created when a text meets a pattern via re.search() method
     borders = []
-    substrings = []
+    substrings = [] #Text snippets
     k = 0
 
     for i in patterns:
-        matches.append(re.search(i,text))
+        matches.append(re.search(i,text)) #re.search will comparte the pattern against the file object (string type)
     for j in matches:
-        borders.append(j.start())
-
-    while k <= len(borders)/2 + 1: #Obtiene porciones del show tech de acuerdo a las fronteras obtenidas
-        #Por medio de expresiones regulares
+            borders.append(j.start()) #----I need to debug this to get better undestanding---
+    while k <= len(borders)/2 + 1: #Get text snippets based on the borders defined via Regex
         substrings.append(text[borders[k]:borders[k+1]-1])
         k=k+2
         
