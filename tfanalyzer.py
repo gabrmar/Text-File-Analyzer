@@ -13,7 +13,7 @@ def filter_text(file_object): #Función de filtrado del show tech
                 "--* show romvar --*","-* show inventory --*","--* show region --*"] #Initial borders
     text = file_object.read()
     matches = [] #Lists of match objects. Match objects are created when a text meets a pattern via re.search() method
-    borders = []
+    borders = [] #Lists of borders, that is the initial index of the match sub-strings ---This requires debugging----
     substrings = [] #Text snippets
     k = 0
 
