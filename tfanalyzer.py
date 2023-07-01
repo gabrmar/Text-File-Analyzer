@@ -10,10 +10,10 @@ def filter_text(file_object): #Función de filtrado del show tech
     archivo de show tech"""
 
     patterns = ["--* show version --*","--* show running-config --*","--* show platform --*",
-                "--* show romvar --*","-* show inventory --*","--* show region --*"] #Initial borders
+                "--* show romvar --*","-* show inventory --*","--* show region --*"] #List of patterns. each pair of patterns corresponds to the initial and final border of a target sub-stirng
     text = file_object.read()
     matches = [] #Lists of match objects. Match objects are created when a text meets a pattern via re.search() method
-    borders = [] #Lists of borders, that is the initial index of the match sub-strings ---This requires debugging----
+    borders = [] #Lists of borders, that is the initial index of the matched patterns (initial border match and final border match)
     substrings = [] #Text snippets
     k = 0
 
@@ -22,8 +22,8 @@ def filter_text(file_object): #Función de filtrado del show tech
     for j in matches:
             borders.append(j.start()) #----I need to debug this to get better undestanding---
     while k <= len(borders)/2 + 1: #Get text snippets based on the borders defined via Regex
-        substrings.append(text[borders[k]:borders[k+1]-1])
-        k=k+2
+        substrings.append(text[borders[k]:borders[k+1]-1]) #The substring is delimited by the indexes of a pair of patterns. the -1 is added to not print the final border 
+        k=k+2 #The loop checks two borders at a time, therfore the counter is increased by two to checl the next pair of borders
         
     return substrings
 
